@@ -30,7 +30,7 @@ jobs:
         run: npm run build -- --configuration=production
 
       - name: Rodar Testes Unitários
-        run: npm run test -- --watch=false --browsers=ChromeHeadless --code-coverage
+        run: npm run test:coverage
 
   terraform:
     name: Deploy Infra AWS
