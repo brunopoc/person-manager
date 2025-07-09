@@ -160,14 +160,6 @@ mock-server/
 - E-mail: formato válido
 - Telefone: formatação automática
 
-## 🚀 Deploy
-
-O projeto está configurado para deploy em ambientes que suportam Node.js:
-
-1. Faça o build da aplicação
-2. Configure as variáveis de ambiente se necessário
-3. Execute `npm start` no servidor
-
 ## 🛠️ Scripts Disponíveis
 
 - `npm start` - Inicia o servidor principal
@@ -175,7 +167,15 @@ O projeto está configurado para deploy em ambientes que suportam Node.js:
 - `npm run start:dev` - Inicia ambos simultaneamente
 - `npm test` - Executa todos os testes
 - `npm run test:coverage` - Executa testes com relatório de cobertura
-- `npm run build` - Build para produção (placeholder)
+- `npm run build` - Build para produção
+
+## Qualidade e Observabilidade
+
+Foram implementados testes unitários para os serviços e componentes principais, utilizando Jest. A cobertura de testes é de [85%]. Uma evolução em termos de qualidade é contar com apoio de ferramentas que permita testes end-to-end utilizando de base ferramentas como o [Cypress](https://docs.cypress.io/app/end-to-end-testing/writing-your-first-end-to-end-test).
+
+Outra sugestão a ser estudada como evolução é a possíbilidade de documentar os componentes da aplicação em um sistema como o [Storybook](https://storybook.js.org/tutorials/intro-to-storybook/angular/pt/get-started)
+
+Em busca da excelência e da observabilidade da aplicação, é fundamental adotar ferramentas que permitam monitorar sua saúde em tempo real. Algumas recomendações incluem o uso de soluções como Sentry (para rastreamento de erros) e Dynatrace (para monitoramento de performance e infraestrutura).
 
 ## Infraestrutura sugerida
 
