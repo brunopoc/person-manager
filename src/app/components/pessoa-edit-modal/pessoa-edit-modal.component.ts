@@ -1,22 +1,22 @@
-import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,
   FormBuilder,
   FormGroup,
   Validators,
-} from "@angular/forms";
-import { Pessoa } from "@models/pessoa.model";
-import { cpfValidator } from "@utils/validators/cpf.validator";
-import { emailValidator } from "@utils/validators/email.validator";
-import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
+} from '@angular/forms';
+import { Pessoa } from '@models/pessoa.model';
+import { cpfValidator } from '@utils/validators/cpf.validator';
+import { emailValidator } from '@utils/validators/email.validator';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: "app-pessoa-edit-modal",
+  selector: 'app-pessoa-edit-modal',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: "./pessoa-edit-modal.component.html",
-  styleUrls: ["./pessoa-edit-modal.component.scss"],
+  templateUrl: './pessoa-edit-modal.component.html',
+  styleUrls: ['./pessoa-edit-modal.component.scss'],
 })
 export class PessoaEditModalComponent implements OnInit {
   @Input() pessoa!: Pessoa;
@@ -24,18 +24,18 @@ export class PessoaEditModalComponent implements OnInit {
 
   editForm!: FormGroup;
 
-  sexoOptions: Array<{ value: "M" | "F" | "Outro"; label: string }> = [
-    { value: "M", label: "Masculino" },
-    { value: "F", label: "Feminino" },
-    { value: "Outro", label: "Outro" },
+  sexoOptions: Array<{ value: 'M' | 'F' | 'Outro'; label: string }> = [
+    { value: 'M', label: 'Masculino' },
+    { value: 'F', label: 'Feminino' },
+    { value: 'Outro', label: 'Outro' },
   ];
 
   constructor(private fb: FormBuilder, public activeModal: NgbActiveModal) {}
 
   ngOnInit(): void {
     if (!this.pessoa) {
-      console.error("Pessoa object is required for PessoaEditModalComponent");
-      this.activeModal.dismiss("no pessoa data");
+      console.error('Pessoa object is required for PessoaEditModalComponent');
+      this.activeModal.dismiss('no pessoa data');
       return;
     }
     this.createForm();
@@ -55,6 +55,7 @@ export class PessoaEditModalComponent implements OnInit {
         [Validators.required, Validators.minLength(10)],
       ],
     });
+    this.editForm.markAllAsTouched();
   }
 
   onSubmit(): void {
@@ -62,8 +63,8 @@ export class PessoaEditModalComponent implements OnInit {
       const updatedPessoa: Pessoa = {
         ...this.pessoa,
         ...this.editForm.value,
-        cpf: this.editForm.get("cpf")?.value.replace(/\D/g, ""),
-        telefone: this.editForm.get("telefone")?.value.replace(/\D/g, ""),
+        cpf: this.editForm.get('cpf')?.value.replace(/\D/g, ''),
+        telefone: this.editForm.get('telefone')?.value.replace(/\D/g, ''),
       };
       this.activeModal.close(updatedPessoa);
     } else {
@@ -72,7 +73,7 @@ export class PessoaEditModalComponent implements OnInit {
   }
 
   onCancel(): void {
-    this.activeModal.dismiss("cancel");
+    this.activeModal.dismiss('cancel');
   }
 
   private markFormGroupTouched(): void {
@@ -88,68 +89,68 @@ export class PessoaEditModalComponent implements OnInit {
       const errors = control.errors;
       const fieldLabel = this.getFieldLabel(fieldName);
 
-      if (errors["required"]) {
+      if (errors['required']) {
         return `${fieldLabel} é obrigatório`;
       }
-      if (fieldName === "telefone" && errors["minlength"]) {
-        return `${fieldLabel} deve ter pelo menos ${errors["minlength"].requiredLength} dígitos`;
+      if (fieldName === 'telefone' && errors['minlength']) {
+        return `${fieldLabel} deve ter pelo menos ${errors['minlength'].requiredLength} dígitos`;
       }
-      if (errors["minlength"]) {
-        return `${fieldLabel} deve ter pelo menos ${errors["minlength"].requiredLength} caracteres`;
+      if (errors['minlength']) {
+        return `${fieldLabel} deve ter pelo menos ${errors['minlength'].requiredLength} caracteres`;
       }
-      if (errors["cpfInvalid"]) {
-        return "CPF inválido";
+      if (errors['cpfInvalid']) {
+        return 'CPF inválido';
       }
-      if (errors["emailInvalid"]) {
-        return "Email inválido";
+      if (errors['emailInvalid']) {
+        return 'Email inválido';
       }
     }
-    return "";
+    return '';
   }
 
   private getFieldLabel(fieldName: string): string {
     const labels: { [key: string]: string } = {
-      nome: "Nome",
-      cpf: "CPF",
-      sexo: "Sexo",
-      email: "Email",
-      telefone: "Telefone",
+      nome: 'Nome',
+      cpf: 'CPF',
+      sexo: 'Sexo',
+      email: 'Email',
+      telefone: 'Telefone',
     };
     return labels[fieldName] || fieldName;
   }
 
   onCpfInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\D/g, "");
+    let value = input.value.replace(/\D/g, '');
 
     if (value.length <= 11) {
-      value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
       input.value = value;
-      this.editForm.get("cpf")?.setValue(value, { emitEvent: false });
+      this.editForm.get('cpf')?.setValue(value, { emitEvent: false });
     }
   }
 
   onTelefoneInput(event: Event): void {
     const input = event.target as HTMLInputElement;
-    let value = input.value.replace(/\D/g, "");
+    let value = input.value.replace(/\D/g, '');
     let formattedValue = value;
 
     if (value.length <= 10) {
-      formattedValue = value.replace(/(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
+      formattedValue = value.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
     } else if (value.length === 11) {
-      formattedValue = value.replace(/(\d{2})(\d{5})(\d{4})/, "($1) $2-$3");
+      formattedValue = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
     }
 
     input.value = formattedValue;
     this.editForm
-      .get("telefone")
+      .get('telefone')
       ?.setValue(formattedValue, { emitEvent: false });
   }
 
   private formatCpf(cpf: string): string {
-    const cleanCpf = cpf.replace(/\D/g, "");
+    const cleanCpf = cpf.replace(/\D/g, '');
     if (cleanCpf.length === 11) {
-      return cleanCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+      return cleanCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     }
     return cpf;
   }
