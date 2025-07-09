@@ -1,0 +1,61 @@
+@import '../../../styles/utils/variables';
+@import '../../../styles/utils/breakpoints';
+
+.error-container {
+  text-align: center;
+  padding: $padding-xl $padding-base;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-icon {
+  font-size: $font-size-head-lg;
+  color: $warning;
+  margin-bottom: $margin-lg;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.05); 
+  }
+}
+
+.error-title {
+  font-size: $font-size-head-base;
+  font-weight: $font-weight-bold;
+  color: $app-orange;
+  margin-bottom: $margin-base;
+  text-shadow: $box-shadow-base;
+}
+
+.error-message {
+  font-size: $font-size-xl;
+  color: $text-secondary;
+  margin-bottom: $margin-xl;
+  line-height: $line-height-base;
+}
+
+.error-actions {
+  display: flex;
+  gap: $margin-base;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@include media-breakpoint-up(md) {
+  .error-title {
+    font-size: $font-size-head-base;
+  }
+  
+  .error-message {
+    font-size: $font-size-base;
+  }
+  
+  .error-icon {
+    font-size: $font-size-head-lg;
+  }
+}

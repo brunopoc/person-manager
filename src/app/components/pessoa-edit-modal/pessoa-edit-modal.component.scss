@@ -1,0 +1,19 @@
+@import '../../../styles/utils/variables';
+
+.invalid-feedback {
+  display: block;
+}
+
+.form-control.is-invalid,
+.form-select.is-invalid {
+  border-color: $danger;
+}
+
+.modal-header {
+  background-color: $app-orange;
+  color: $text-white;
+}
+
+.modal-title {
+  font-weight: $font-weight-semibold;
+}

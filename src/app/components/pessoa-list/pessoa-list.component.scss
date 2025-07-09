@@ -1,0 +1,31 @@
+@import "../../../styles/utils/variables";
+
+.pessoa-list-container {
+  min-height: 400px;
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $padding-xl $padding-base;
+}
+
+.empty-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $padding-xl $padding-base;
+  min-height: 400px;
+}
+
+.spinner-border {
+  width: $margin-xl;
+  height: $margin-xl;
+}
+
+.spinner-border-sm {
+  width: $margin-base;
+  height: $margin-base;
+}

@@ -1,0 +1,13 @@
+<div class="home-header">
+  <p class="page-subtitle">
+    Gerencie e visualize todas as pessoas cadastradas no sistema
+  </p>
+</div>
+
+<app-pessoa-list
+  [pessoas]="pessoas"
+  [isLoading]="isLoading"
+  (editPessoa)="startEdit($event)"
+  (deletePessoa)="deletePessoa($event)"
+>
+</app-pessoa-list>

@@ -1,0 +1,33 @@
+<div class="card pessoa-card h-100">
+  <div class="card-body">
+    <h5 class="card-title">{{ pessoa.nome }}</h5>
+    <p class="card-text">
+      <small class="text-muted">CPF: {{ formatCpf(pessoa.cpf) }}</small>
+    </p>
+    <div class="pessoa-info">
+      <p><strong>Sexo:</strong> {{ getSexoLabel(pessoa.sexo) }}</p>
+      <p><strong>Email:</strong> {{ pessoa.email }}</p>
+      <p><strong>Telefone:</strong> {{ pessoa.telefone }}</p>
+    </div>
+  </div>
+  <div class="card-footer">
+    <div class="btn-group w-100" role="group">
+      <button 
+        type="button" 
+        class="btn btn-app btn-sm" 
+        (click)="onEdit()"
+        [title]="'Editar ' + pessoa.nome">
+        <i class="bi bi-pencil-square me-1"></i>
+        Editar
+      </button>
+      <button 
+        type="button" 
+        class="btn btn-outline-danger btn-sm" 
+        (click)="onDelete()"
+        [title]="'Remover ' + pessoa.nome">
+        <i class="bi bi-trash me-1"></i>
+        Remover
+      </button>
+    </div>
+  </div>
+</div>

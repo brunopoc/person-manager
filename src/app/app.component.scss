@@ -1,0 +1,91 @@
+@import '../styles/utils/variables';
+
+.app-header {
+  background: $gradient-header;
+  color: $text-white;
+  padding: $padding-xl 0;
+  margin-bottom: $padding-xl;
+  
+  .app-title {
+    font-size: $font-size-title;
+    font-weight: $font-weight-bold;
+    margin-bottom: $margin-sm;
+    text-align: center;
+  }
+  
+  .app-subtitle {
+    font-size: $font-size-subtitle;
+    opacity: $opacity-muted;
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+.navigation-card {
+  border: none;
+  box-shadow: $shadow-card;
+  border-radius: $border-radius-xl;
+  overflow: hidden;
+  margin-bottom: $margin-lg;
+  
+  .nav-tabs {
+    border-bottom: none;
+    
+    .nav-link {
+      border: none;
+      background: $bg-secondary;
+      color: $text-primary;
+      font-weight: $font-weight-semibold;
+      padding: $padding-base $margin-lg;
+      position: relative;
+      transition: $transition-base;
+      
+      &:hover {
+        background: $border-color-light;
+        color: $app-orange;
+      }
+      
+      &.active {
+        background: $app-orange;
+        color: $text-white;
+        
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: $height-decoration;
+          background: $app-orange-dark;
+        }
+      }
+      
+      i {
+        font-size: $icon-size-sm;
+      }
+    }
+  }
+}
+
+.content-wrapper {
+  min-height: $min-height-content;
+}
+
+@media (max-width: map-get($container-max-widths, md)) {
+  .app-header {
+    padding: $margin-lg 0;
+    
+    .app-title {
+      font-size: ($font-size-title * 0.8);
+    }
+    
+    .app-subtitle {
+      font-size: $font-size-base;
+    }
+  }
+  
+  .navigation-card .nav-tabs .nav-link {
+    padding: ($padding-base * 0.8) $padding-base;
+    font-size: $font-size-sm;
+  }
+}

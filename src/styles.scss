@@ -1,1 +1,183 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles - Sistema de Gestão de Pessoas */
+
+// Importar arquivos de configuração
+@import "styles/utils/variables";
+@import "styles/utils/mixins";
+@import "styles/utils/breakpoints";
+
+// ========== ESTILOS GLOBAIS ==========
+body {
+  font-family: $font-family-base;
+  background-color: $bg-secondary;
+  color: $text-primary;
+  line-height: $line-height-base;
+}
+
+// ========== BOTÕES App ==========
+.btn-app {
+  // AQUI É O AJUSTE: Passe $app-orange também para a borda
+  @include button-variant($app-orange, $app-orange);
+  background: linear-gradient(135deg, $app-orange-light 0%, $app-orange 100%);
+  font-weight: $font-weight-semibold;
+  padding: $padding-sm $padding-lg;
+  border-radius: $border-radius-lg;
+  box-shadow: $box-shadow-sm;
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      $app-orange 0%,
+      $app-orange-dark 100%
+    );
+    transform: translateY(-1px);
+    box-shadow: $box-shadow-base;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-app-outline {
+  @include button-outline-variant($app-orange);
+  font-weight: $font-weight-semibold;
+  padding: $padding-sm $padding-lg;
+  border-radius: $border-radius-lg;
+  border-width: 2px;
+}
+
+// ========== NAVBAR ==========
+.navbar-app {
+  background: linear-gradient(135deg, $app-orange 0%, $app-orange-dark 100%);
+  box-shadow: $box-shadow-sm;
+
+  .navbar-brand {
+    color: $text-white !important;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xl;
+  }
+
+  .nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: $font-weight-medium;
+    transition: $transition-base;
+
+    &:hover {
+      color: $text-white !important;
+    }
+
+    &.active {
+      color: $text-white !important;
+      font-weight: $font-weight-semibold;
+    }
+  }
+}
+
+// ========== CARDS ==========
+.card {
+  @include card-shadow;
+  border: none;
+  border-radius: $border-radius-xl;
+
+  .card-header {
+    background: linear-gradient(
+      135deg,
+      $app-orange-light 0%,
+      $app-orange 100%
+    );
+    color: $text-white;
+    border: none;
+    border-radius: $border-radius-xl $border-radius-xl 0 0 !important;
+    font-weight: $font-weight-semibold;
+  }
+}
+
+// ========== FORMULÁRIOS ==========
+.form-control {
+  @include form-control-focus($app-orange);
+  border-radius: $border-radius-lg;
+  border: 2px solid $border-color;
+  padding: $padding-sm $padding-base;
+  font-size: $font-size-base;
+
+  &.is-invalid {
+    border-color: $danger;
+    box-shadow: 0 0 0 0.2rem rgba($danger, 0.25);
+  }
+
+  &.is-valid {
+    border-color: $success;
+    box-shadow: 0 0 0 0.2rem rgba($success, 0.25);
+  }
+}
+
+.form-select {
+  @include form-control-focus($app-orange);
+  border-radius: $border-radius-lg;
+  border: 2px solid $border-color;
+  padding: $padding-sm $padding-base;
+}
+
+// ========== ALERTS ==========
+.alert {
+  border: none;
+  border-radius: $border-radius-xl;
+  border-left: 4px solid;
+  font-weight: $font-weight-medium;
+}
+
+// ========== UTILITÁRIOS ==========
+.text-app {
+  color: $app-orange !important;
+}
+
+.bg-app {
+  background-color: $app-orange !important;
+}
+
+.border-app {
+  border-color: $app-orange !important;
+}
+
+// ========== LOADING SPINNER ==========
+.spinner-app {
+  border: 3px solid rgba($app-orange, 0.2);
+  border-top: 3px solid $app-orange;
+  border-radius: $border-radius-pill;
+  width: 2rem;
+  height: 2rem;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// ========== ANIMAÇÕES ==========
+.fade-in {
+  @include fade-in;
+}
+
+// ========== RESPONSIVIDADE ==========
+@include mobile {
+  .container {
+    padding-left: $padding-base;
+    padding-right: $padding-base;
+  }
+
+  .btn {
+    font-size: $font-size-sm;
+    padding: $padding-sm;
+  }
+}
+
+@include tablet {
+  .navbar-brand {
+    font-size: $font-size-lg;
+  }
+}

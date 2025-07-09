@@ -1,0 +1,147 @@
+// Breakpoints e Media Queries
+
+// ========== BREAKPOINTS ==========
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+);
+
+// ========== MIXINS DE MEDIA QUERIES ==========
+
+// Media query para breakpoint específico e acima
+@mixin media-breakpoint-up($name) {
+  $min: map-get($breakpoints, $name);
+  @if $min != 0 {
+    @media (min-width: $min) {
+      @content;
+    }
+  } @else {
+    @content;
+  }
+}
+
+// Media query para breakpoint específico e abaixo
+@mixin media-breakpoint-down($name) {
+  $max: map-get($breakpoints, $name) - 0.02;
+  @media (max-width: $max) {
+    @content;
+  }
+}
+
+// Media query apenas para breakpoint específico
+@mixin media-breakpoint-only($name) {
+  $min: map-get($breakpoints, $name);
+  $next: map-get($breakpoints, $name) + 1;
+  $max: $next - 0.02;
+  
+  @if $min != 0 and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($name) {
+      @content;
+    }
+  } @else if $min == 0 {
+    @include media-breakpoint-down($next) {
+      @content;
+    }
+  }
+}
+
+// Media query entre dois breakpoints
+@mixin media-breakpoint-between($lower, $upper) {
+  $min: map-get($breakpoints, $lower);
+  $max: map-get($breakpoints, $upper) - 0.02;
+  
+  @if $min != null and $max != null {
+    @media (min-width: $min) and (max-width: $max) {
+      @content;
+    }
+  } @else if $max == null {
+    @include media-breakpoint-up($lower) {
+      @content;
+    }
+  } @else if $min == 0 {
+    @include media-breakpoint-down($upper) {
+      @content;
+    }
+  }
+}
+
+// ========== ATALHOS PARA BREAKPOINTS COMUNS ==========
+
+// Mobile first
+@mixin mobile {
+  @include media-breakpoint-down(sm) {
+    @content;
+  }
+}
+
+// Tablet
+@mixin tablet {
+  @include media-breakpoint-between(sm, lg) {
+    @content;
+  }
+}
+
+// Desktop
+@mixin desktop {
+  @include media-breakpoint-up(lg) {
+    @content;
+  }
+}
+
+// Mobile e tablet
+@mixin mobile-tablet {
+  @include media-breakpoint-down(lg) {
+    @content;
+  }
+}
+
+// Tablet e desktop
+@mixin tablet-desktop {
+  @include media-breakpoint-up(sm) {
+    @content;
+  }
+}
+
+// ========== UTILITÁRIOS RESPONSIVOS ==========
+
+// Mixin para ocultar elementos em breakpoints específicos
+@mixin hide-on($breakpoint) {
+  @include media-breakpoint-only($breakpoint) {
+    display: none !important;
+  }
+}
+
+// Mixin para mostrar elementos apenas em breakpoints específicos
+@mixin show-only-on($breakpoint) {
+  display: none !important;
+  
+  @include media-breakpoint-only($breakpoint) {
+    display: block !important;
+  }
+}
+
+// Mixin para textos responsivos
+@mixin responsive-font-size($min-size, $max-size, $min-width: 320px, $max-width: 1200px) {
+  font-size: $min-size;
+  
+  @media (min-width: $min-width) and (max-width: $max-width) {
+    font-size: calc(#{$min-size} + #{strip-units($max-size - $min-size)} * ((100vw - #{$min-width}) / #{strip-units($max-width - $min-width)}));
+  }
+  
+  @media (min-width: $max-width) {
+    font-size: $max-size;
+  }
+}
+
+// Função auxiliar para remover unidades
+@function strip-units($number) {
+  @return $number / ($number * 0 + 1);
+}

@@ -1,0 +1,41 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+
+@import "../../../styles/utils/variables";
+
+.modal-header {
+  border-bottom: none;
+  border-radius: $border-radius-base $border-radius-base 0 0;
+  padding: $padding-base $padding-lg;
+  font-weight: $font-weight-bold;
+  color: $text-white;
+
+  &.bg-success {
+    background-color: $success !important;
+  }
+  &.bg-error {
+    background-color: $danger !important;
+  }
+  &.bg-info {
+    background-color: $info !important;
+  }
+  &.bg-warning {
+    background-color: $warning !important;
+  }
+}
+
+.modal-body {
+  padding: $padding-lg;
+  color: $text-primary !important;
+}
+
+:host ::ng-deep .modal-content {
+  border-radius: $border-radius-lg;
+  overflow: hidden;
+  box-shadow: $shadow-notification;
+}
+
+:host ::ng-deep .modal-dialog {
+  max-width: $notification-max-width;
+  min-width: $notification-min-width;
+}

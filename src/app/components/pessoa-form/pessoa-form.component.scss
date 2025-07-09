@@ -1,0 +1,64 @@
+@import '../../../styles/variables';
+
+h2 {
+  color: $app-orange;
+  margin-bottom: $margin-base;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: $margin-base;
+}
+
+label {
+  display: block;
+  margin-bottom: ($margin-sm * 0.5);
+  font-weight: $font-weight-bold;
+  color: $text-primary;
+}
+
+input, select {
+  width: 100%;
+  padding: ($padding-sm * 1.5);
+  border: ($border-width * 2) solid $border-color;
+  border-radius: ($border-radius-base * 1.07);
+  font-size: $font-size-base;
+  transition: border-color 0.3s;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: $app-orange;
+}
+
+input.error, select.error {
+  border-color: $danger;
+}
+
+.error-message {
+  color: $danger;
+  font-size: $font-size-sm;
+  margin-top: ($margin-sm * 0.5);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: ($padding-sm * 1.875);
+  background: $app-orange;
+  color: $text-white;
+  border: none;
+  border-radius: ($border-radius-base * 1.07);
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: $app-orange-dark;
+}
+
+.submit-btn:disabled {
+  background: $text-muted;
+  cursor: not-allowed;
+}

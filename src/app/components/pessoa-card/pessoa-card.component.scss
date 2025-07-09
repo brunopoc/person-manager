@@ -1,0 +1,47 @@
+@import '../../../styles/utils/variables';
+
+.pessoa-card {
+  transition: $transition-base;
+  border: $border-width solid $border-color;
+  border-radius: $border-radius-base;
+  
+  &:hover {
+    box-shadow: $box-shadow-base;
+  }
+}
+
+.pessoa-info {
+  p {
+    margin-bottom: $margin-sm;
+    font-size: $font-size-sm;
+    color: $text-primary;
+    
+    strong {
+      color: $text-primary;
+      font-weight: $font-weight-semibold;
+    }
+  }
+}
+
+.card-footer {
+  background-color: $bg-secondary;
+  border-top: $border-width solid $border-color;
+  padding: $padding-sm;
+  
+  .btn-group {
+    gap: $margin-sm;
+  }
+}
+
+.card-title {
+  color: $text-primary;
+  font-weight: $font-weight-semibold;
+  margin-bottom: $margin-sm;
+}
+
+.card-text {
+  .text-muted {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+  }
+}

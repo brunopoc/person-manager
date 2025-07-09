@@ -1,0 +1,162 @@
+// Mixins SCSS - Mixins e funções reutilizáveis
+
+@import 'variables';
+
+// ========== MIXINS DE BOTÕES ==========
+@mixin button-variant($bg-color, $border-color: $bg-color, $color: $text-white) {
+  background-color: $bg-color;
+  border-color: $border-color;
+  color: $color;
+  
+  &:hover {
+    background-color: darken($bg-color, 7.5%);
+    border-color: darken($border-color, 10%);
+    color: $color;
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba($bg-color, 0.5);
+  }
+  
+  &:active {
+    background-color: darken($bg-color, 10%);
+    border-color: darken($border-color, 12.5%);
+  }
+  
+  &:disabled {
+    background-color: $bg-color;
+    border-color: $border-color;
+    opacity: 0.65;
+  }
+}
+
+@mixin button-outline-variant($color) {
+  color: $color;
+  border-color: $color;
+  background-color: transparent;
+  
+  &:hover {
+    color: $text-white;
+    background-color: $color;
+    border-color: $color;
+  }
+  
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba($color, 0.5);
+  }
+  
+  &:active {
+    color: $text-white;
+    background-color: $color;
+    border-color: $color;
+  }
+}
+
+// ========== MIXINS DE FORMULÁRIO ==========
+@mixin form-control-focus($color: $app-orange) {
+  &:focus {
+    border-color: lighten($color, 25%);
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba($color, 0.25);
+  }
+}
+
+@mixin form-validation-state($color) {
+  .form-control {
+    border-color: $color;
+    
+    &:focus {
+      border-color: $color;
+      box-shadow: 0 0 0 0.2rem rgba($color, 0.25);
+    }
+  }
+  
+  .form-feedback {
+    color: $color;
+  }
+}
+
+// ========== MIXINS DE LAYOUT ==========
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+// ========== MIXINS DE TEXTO ==========
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin text-gradient($start-color, $end-color) {
+  background: linear-gradient(45deg, $start-color, $end-color);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// ========== MIXINS DE ANIMAÇÃO ==========
+@mixin slide-in-right {
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  animation: slideInRight 0.3s ease-out;
+}
+
+@mixin slide-out-right {
+  @keyframes slideOutRight {
+    from {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+  }
+  animation: slideOutRight 0.3s ease-in;
+}
+
+@mixin fade-in {
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  animation: fadeIn 0.2s ease-in;
+}
+
+// ========== MIXINS DE SOMBRA ==========
+@mixin card-shadow {
+  box-shadow: $box-shadow-base;
+  transition: $transition-base;
+  
+  &:hover {
+    box-shadow: $box-shadow-lg;
+  }
+}
+
+@mixin notification-shadow {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
