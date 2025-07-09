@@ -148,7 +148,7 @@ describe('PessoaSearchComponent', () => {
     cpfControl?.setValue('12345678901');
     cpfControl?.markAsTouched();
     // Force the error to be set correctly
-    cpfControl?.setErrors({ 'cpfInvalido': true });
+    cpfControl?.setErrors({ 'cpfInvalid': true });
     
     expect(component.getErrorMessage()).toBe('CPF inválido');
   });

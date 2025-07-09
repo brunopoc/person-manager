@@ -92,10 +92,11 @@ export class PessoaSearchComponent implements OnInit {
   getErrorMessage(): string {
     const control = this.searchForm.get('cpf');
     if (control && control.errors && control.touched) {
+      console.log(control.errors);
       if (control.errors['required']) {
         return 'CPF é obrigatório';
       }
-      if (control.errors['cpfInvalido']) {
+      if (control.errors['cpfInvalid']) {
         return 'CPF inválido';
       }
     }
