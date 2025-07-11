@@ -1,4 +1,4 @@
-name: 🚀 Test & Deploy Angular + Terraform
+name: Test & Deploy Angular + Terraform
 
 on:
   push:
@@ -26,20 +26,32 @@ jobs:
       - name: Instalar Dependências
         run: npm install
 
-      - name: Compilar a Aplicação Angular
+      - name: Compilar Aplicação Angular
         run: npm run build -- --configuration=production
 
       - name: Rodar Testes Unitários
-        run: npm run test:coverage
+        run: npm run test:coverage -- --watch=false --browsers=ChromeHeadless
+
+      - name: Salvar Build Angular
+        uses: actions/upload-artifact@v3
+        with:
+          name: angular-dist
+          path: dist/
 
   terraform:
-    name: Deploy Infra AWS
+    name: Deploy Infra e App na AWS
     needs: test
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout do Código
         uses: actions/checkout@v3
+
+      - name: Baixar Build Angular
+        uses: actions/download-artifact@v3
+        with:
+          name: angular-dist
+          path: dist/
 
       - name: Configurar Credenciais AWS
         uses: aws-actions/configure-aws-credentials@v1
@@ -59,8 +71,14 @@ jobs:
       - name: Validar Terraform
         run: terraform validate
 
-      - name: Aplicar Terraform (Criar Infra)
+      - name: Aplicar Terraform
         run: terraform apply -auto-approve
 
-      - name: Mostrar Outputs da Infraestrutura
-        run: terraform output
+      - name: Obter Nome do Bucket
+        id: tf_outputs
+        run: |
+          echo "bucket_name=$(terraform output -raw frontend_bucket_name)" >> $GITHUB_OUTPUT
+
+      - name: Fazer Deploy da Aplicação Angular para o S3
+        run: |
+          aws s3 sync dist/ s3://${{ steps.tf_outputs.outputs.bucket_name }} --delete
