@@ -10,9 +10,8 @@ Uma aplicação Angular 17 moderna para cadastro e consulta de pessoas com formu
 - ✅ Validação de CPF e e-mail com regex
 - ✅ Interface responsiva com design App
 - ✅ Mock server separado para simulação de backend
-- ✅ Testes unitários com 100% de cobertura
+- ✅ Testes unitários com +85% de cobertura
 - ✅ Interface em português brasileiro
-- ✅ Cores oficiais do Banco App (#EC7000)
 
 ## 🎨 Design System
 
